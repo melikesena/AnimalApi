@@ -1,0 +1,20 @@
+{
+  "Version": 1,
+  "Hash": "0FAqkb8bFEesOlKhBFylQizKfVTw5r97eIeJwQADhKM=",
+  "Source": "AnimalApi",
+  "BasePath": "_content/AnimalApi",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "AnimalApi\\wwwroot",
+      "Source": "AnimalApi",
+      "ContentRoot": "C:\\Users\\melik\\AnimalApi\\wwwroot\\",
+      "BasePath": "_content/AnimalApi",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [],
+  "Endpoints": []
+}
