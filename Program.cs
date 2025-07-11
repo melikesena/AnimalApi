@@ -1,22 +1,20 @@
 using AnimalApi.Interfaces;
+using AnimalApi.Models;
 using AnimalApi.Services;
 
-var builder = WebApplication.CreateBuilder(new WebApplicationOptions
-{
-    Args = args,
-    ApplicationName = typeof(Program).Assembly.FullName,
-    ContentRootPath = Directory.GetCurrentDirectory(),
-    WebRootPath = "wwwroot",
-    EnvironmentName = Environments.Development
-});
 
-builder.WebHost.ConfigureKestrel(options =>
-{
-    options.ListenAnyIP(5000); // Her IP'den bağlanılabilir
-});
+var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
+// MongoDB ayarlarını al
+builder.Services.Configure<MongoDbSettings>(
+    builder.Configuration.GetSection("MongoDbSettings")
+);
+
+// DI kayıtları
 builder.Services.AddSingleton<IAnimalService, AnimalService>();
+builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 

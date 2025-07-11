@@ -33,3 +33,12 @@ C:\Users\melik\AnimalApi\obj\Debug\net9.0\AnimalApi.pdb
 C:\Users\melik\AnimalApi\obj\Debug\net9.0\AnimalApi.genruntimeconfig.cache
 C:\Users\melik\AnimalApi\obj\Debug\net9.0\ref\AnimalApi.dll
 C:\Users\melik\AnimalApi\bin\Debug\net9.0\AnimalApi.staticwebassets.runtime.json
+C:\Users\melik\AnimalApi\bin\Debug\net9.0\DnsClient.dll
+C:\Users\melik\AnimalApi\bin\Debug\net9.0\MongoDB.Bson.dll
+C:\Users\melik\AnimalApi\bin\Debug\net9.0\MongoDB.Driver.dll
+C:\Users\melik\AnimalApi\bin\Debug\net9.0\SharpCompress.dll
+C:\Users\melik\AnimalApi\bin\Debug\net9.0\Snappier.dll
+C:\Users\melik\AnimalApi\bin\Debug\net9.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\melik\AnimalApi\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\melik\AnimalApi\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\melik\AnimalApi\bin\Debug\net9.0\ZstdSharp.dll

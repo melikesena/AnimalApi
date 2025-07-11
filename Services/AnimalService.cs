@@ -1,49 +1,44 @@
 using AnimalApi.Models;
 using AnimalApi.Interfaces;
+using Microsoft.Extensions.Options;
+using MongoDB.Driver;
 
 namespace AnimalApi.Services
 {
     public class AnimalService : IAnimalService
     {
-        // Geçici veri için bellek içi liste
-        private readonly List<Animal> _animals = new();
+        private readonly IMongoCollection<Animal> _animalsCollection;
 
-        public Task<List<Animal>> GetAllAnimalsAsync()
+        public AnimalService(IOptions<MongoDbSettings> mongoSettings)
         {
-            return Task.FromResult(_animals);
+            var client = new MongoClient(mongoSettings.Value.ConnectionString);
+            var database = client.GetDatabase(mongoSettings.Value.DatabaseName);
+            _animalsCollection = database.GetCollection<Animal>(mongoSettings.Value.AnimalsCollectionName);
         }
 
-        public Task<Animal> GetAnimalByIdAsync(string id)
+        public async Task<List<Animal>> GetAllAnimalsAsync()
         {
-            var animal = _animals.FirstOrDefault(a => a.Id == id);
-            return Task.FromResult(animal);
+            return await _animalsCollection.Find(_ => true).ToListAsync();
         }
 
-        public Task CreateAnimalAsync(Animal animal)
+        public async Task<Animal> GetAnimalByIdAsync(string id)
         {
-            _animals.Add(animal);
-            return Task.CompletedTask;
+            return await _animalsCollection.Find(a => a.Id == id).FirstOrDefaultAsync();
         }
 
-        public Task UpdateAnimalAsync(string id, Animal updatedAnimal)
+        public async Task CreateAnimalAsync(Animal animal)
         {
-            var animal = _animals.FirstOrDefault(a => a.Id == id);
-            if (animal != null)
-            {
-                animal.Name = updatedAnimal.Name;
-                animal.Type = updatedAnimal.Type;
-            }
-            return Task.CompletedTask;
+            await _animalsCollection.InsertOneAsync(animal);
         }
 
-        public Task DeleteAnimalAsync(string id)
+        public async Task UpdateAnimalAsync(string id, Animal updatedAnimal)
         {
-            var animal = _animals.FirstOrDefault(a => a.Id == id);
-            if (animal != null)
-            {
-                _animals.Remove(animal);
-            }
-            return Task.CompletedTask;
+            await _animalsCollection.ReplaceOneAsync(a => a.Id == id, updatedAnimal);
+        }
+
+        public async Task DeleteAnimalAsync(string id)
+        {
+            await _animalsCollection.DeleteOneAsync(a => a.Id == id);
         }
     }
 }
